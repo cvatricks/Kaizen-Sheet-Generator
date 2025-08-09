@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  width : 1320px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Kaizen Sheet Generator</h2>
+
+<div class="container" id="mainContainer"></div>
+
+<div class="forminput" id="forminputContainer">
+
+        <form onsubmit="event.preventDefault(); generateKaizen();">
+            <p style="position:absolute;top:120px;font-size:30px;left:40px;">
+                Kaizen No. : <input id="knoi" style="height:40px;top:10px;font-size:30px;" type="number" name="knoi" />
+                <br>
+            <p style="position:relative;top:90px;font-size:30px;left:40px;">
+               Start Date : <input id="startdate" style="height:40px;top:10px;font-size:30px;" type="date" name="startdate" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Finish Date : <input id="finishdate" style="height:40px;top:10px;font-size:30px;" type="date" name="finishdate" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Members : <input id="members" style="height:40px;top:10px;font-size:30px;width:360px;" type="text" name="members" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Before Photo : 		<input id="beforephoto" type="file" onchange="encodebp();" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               After Photo : 		<input id="afterphoto" type="file" onchange="encodeap();" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Employee Photo : 		<input id="empphoto" type="file" onchange="encodeep();" />
+
+		<br><br>
+  <select style="height:60px;top:10px;font-size:30px;width:1080px;" id="car-select" onchange="showCarDetails()">
+    <option style="position:relative;top:110px;font-size:30px;left:40px;" value="">--Please choose an option--</option>
+      <option value="SOC" data-details="SOC">Elimination of SOC</option>
+      <option value="HTA" data-details="HTA">Elimination of HTA</option>
+      <option value="L1" data-details="L1">Elimination of Machine Breakdown Phenomenon</option>
+      <option value="L2" data-details="L2">Job setting time reduction</option>
+      <option value="L3" data-details="L3">Tool Change time reduction</option>
+      <option value="L5" data-details="L5">Idling and minor stoppage time reduction</option>
+      <option value="L6" data-details="L6">Speed loss time reduction</option>
+      <option value="L7" data-details="L7">Defect and Rework time reduction</option>
+      <option value="L8" data-details="L8">MTTR time reduction</option>
+      <option value="L13" data-details="L13">Measurement and adjustment time reduction</option>
+      <option value="E&T" data-details="E&T">Enhace Employee Skill</option>
+      <option value="SHE" data-details="SHE">Elimination of Unsafe condition</option>
+      <option value="OTPM" data-details="OTPM">Office Area Time Saving</option>
+      <option value="DM1" data-details="DM1">Elimination Machine Problem in New Machines</option>
+
+      
+  </select>
+
+  <div id="details-container"></div>
+
+  <script>
+    function showCarDetails() {
+      // Get the select element
+      const carSelect = document.getElementById('car-select');
+    
+      // Get the selected option
+      const selectedOption = carSelect.options[carSelect.selectedIndex];
+    
+      // Get the details from the data-details attribute
+      // Use a default message if no option is selected
+      const details = selectedOption.getAttribute('data-details') || 'Select a car to see its details.';
+    
+      // Get the details container
+      const detailsContainer = document.getElementById('details-container');
+    
+      // Update the content of the container
+      detailsContainer.innerHTML = `<p>${details}</p>`;
+      if (details == "L1") {
+         detailsContainer.innerHTML = `<p>${details}</p>`;
+      }
+         
+    }
+  </script>
+                <input style="position:absolute;font-size:30px;height:50px;top:800px;left:50px;" type="submit" value="submit" />
+            </p>
+        </form>
+
+</div>
+
+<script>
+let beforephoto = '';
+let afterphoto = '';
+let empphoto = '';
+
+function encodebp() {
+  var selectedfile = document.getElementById("beforephoto").files;
+  if (selectedfile.length > 0) {
+    var imageFile = selectedfile[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+      var srcData = fileLoadedEvent.target.result;
+      beforephoto = srcData; // Assign to global variable
+    }
+    fileReader.readAsDataURL(imageFile); // Add this line to read the file
+  }
+}
+
+function encodeap() {
+  var selectedfile = document.getElementById("afterphoto").files;
+  if (selectedfile.length > 0) {
+    var imageFile = selectedfile[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+      var srcData = fileLoadedEvent.target.result;
+      afterphoto = srcData; // Assign to global variable
+    }
+    fileReader.readAsDataURL(imageFile); // Add this line to read the file
+  }
+}
+
+function encodeep() {
+  var selectedfile = document.getElementById("empphoto").files;
+  if (selectedfile.length > 0) {
+    var imageFile = selectedfile[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+      var srcData = fileLoadedEvent.target.result;
+      empphoto = srcData; // Assign to global variable
+    }
+    fileReader.readAsDataURL(imageFile); // Add this line to read the file
+  }
+}
+
+async function generateKaizen() {
+  try {
+    let knoo = document.getElementById("knoi").value;
+    let startdate = document.getElementById("startdate").value;
+    let finishdate = document.getElementById("finishdate").value;
+    let members = document.getElementById("members").value;
+    let bp = document.getElementById("beforephoto").value;
+    let ap = document.getElementById("afterphoto").value;
+    let ep = document.getElementById("empphoto").value;
+    bp = beforephoto;
+    ap = afterphoto;
+    ep = empphoto;
+    let mainContainer = document.getElementById("mainContainer");
+    let forminputContainer = document.getElementById("forminputContainer");
+    
+    // Construct the HTML content with the user-provided knoo value
+    let containerContent = `<table style="width:100%">
+  <tr>
+    <th style="height:50px;font-size:x-large;" colspan="12"><img style="position:absolute; left:30px; height:30px; width:90px; z-index:1;" src="logo.png" />Kaizen Idea Sheet</th>
+    <td  style="width:9%" rowspan="7"><img style="height:180px;width:120px;" src="${empphoto}" /></td>
+  </tr>
+  <tr>
+    <td colspan="10"> </td>
+    <td  style="width:6%">Rev.No.</td>
+    <td  style="width:9%">01 / 18-01-2024</td>
+  </tr>
+  <tr>
+    <td  style="width:6%">Doc.No.:</td>
+    <td  style="width:6%">DT/FMT/KAIZEN/00</td>
+    <td colspan="8"> </td>
+    <td  style="width:6%">DCR No.:</td>
+    <td  style="width:9%">1348</td>
+  </tr>
+  <tr>
+    <td  style="width:6%">Doc.Name.:</td>
+    <td  style="width:14%">Kaizen Idea Sheet</td>
+    <td colspan="8"> </td>
+    <td  style="width:12%">ERP Kaizen No:</td>
+    <td  style="width:9%">${knoo}</td>
+  </tr>
+  <tr style="height:25px;">
+    <td colspan="12"> </td>
+  </tr>
+ 
+  <tr>
+    <td style="vertical-align:top;" colspan="2" rowspan="3" style="width:20%">Theme:</td>
+    <td>PILLAR</td>
+    <td style="text-align:center;">JH</td>
+    <td style="text-align:center;">KK</td>
+    <td style="text-align:center;">PM</td>
+    <td style="text-align:center;">QM</td>
+    <td style="text-align:center;">OTPM</td>
+    <td style="text-align:center;">SHE</td>
+    <td style="text-align:center;">E&T</td>
+    <td style="text-align:center;">DM</td>
+    <td style="text-align:left;" rowspan="2">Plant : Dietech</td>
+  </tr>
+  <tr>
+    <td>Loss</td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+  </tr>
+  <tr>
+    <td>PQCDSM</td>
+    <td style="text-align:center;">P</td>
+    <td style="text-align:center;">Q</td>
+    <td style="text-align:center;">C</td>
+    <td style="text-align:center;">D</td>
+    <td style="text-align:center;">S</td>
+    <td style="text-align:center;">M</td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:left;" colspan="2">Machine : </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top;" colspan="2" rowspan="7" style="width:20%">Problem / Present Status:</td>
+    <td style="vertical-align:top;" colspan="9" rowspan="5">Kaizen Idea:</td>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" rowspan="3" >Benchmark : </td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Target :</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Start Date :${startdate}</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="9" rowspan="2" >Countermeasure :</td>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Finish Date :${finishdate}</td> 
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="9" >Members :${members}</td> 
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" >Analysis :</td> 
+    <td style="text-align:center;height:50px;vertical-align:top;" colspan="5" >Before<br><img style="height:180px;width:360px;" src="${beforephoto}" /></td>
+    <td style="text-align:center;height:50px;vertical-align:top;" colspan="4" >After<br><img style="height:180px;width:300px;" src="${afterphoto}" /></td>
+    <td style="text-align:left;height:200px;vertical-align:top;" colspan="4" >Benefits:</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" >Root Cause :</td> 
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="9" >Results:</td>
+    <td style="text-align:left;height:100px;vertical-align:top;" colspan="4" >H/D Plan:</td>
+  </tr>
+</table>`;
+    
+    // Set the inner HTML of the container to display the generated sheet
+    forminputContainer.innerHTML = "";
+    mainContainer.innerHTML = containerContent;
+  } catch (err) {
+    console.log(err);
+  }
+}
+</script>
+
+</body>
+</html>
