@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  width : 1320px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script>
+    if (typeof ChartDataLabels !== 'undefined') {
+        Chart.register(ChartDataLabels);
+    }
+</script>
+</head>
+<body>
+
+<h2>Kaizen Sheet Generator</h2>
+
+<div class="container" id="mainContainer"></div>
+
+<div class="forminput" id="forminputContainer">
+
+        <form onsubmit="event.preventDefault(); generateKaizen();">
+            <p style="position:absolute;top:120px;font-size:30px;left:40px;">
+                Kaizen No. : <input id="knoi" style="height:40px;top:10px;font-size:30px;" type="number" name="knoi" />
+                <br>
+            <p style="position:relative;top:90px;font-size:30px;left:40px;">
+               Start Date : <input id="startdate" style="height:40px;top:10px;font-size:30px;" type="date" name="startdate" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Finish Date : <input id="finishdate" style="height:40px;top:10px;font-size:30px;" type="date" name="finishdate" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Members : <input id="members" style="height:40px;top:10px;font-size:30px;width:360px;" type="text" name="members" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Before Photo : 		<input id="beforephoto" type="file" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               After Photo : 		<input id="afterphoto" type="file" />
+                <br>
+            <p style="position:relative;top:110px;font-size:30px;left:40px;">
+               Employee Photo : 		<input id="empphoto" type="file" />
+
+		<br><br>
+  <select style="height:60px;top:10px;font-size:30px;width:1080px;" id="car-select" onchange="showCarDetails()">
+    <option style="position:relative;top:110px;font-size:30px;left:40px;" value="">--Please choose an option--</option>
+      <option value="SOC" data-details="SOC">Elimination of SOC</option>
+      <option value="HTA" data-details="HTA">Elimination of HTA</option>
+      <option value="L1" data-details="L1">Elimination of Machine Breakdown Phenomenon</option>
+      <option value="L2" data-details="L2">Job setting time reduction</option>
+      <option value="L3" data-details="L3">Tool Change time reduction</option>
+      <option value="L5" data-details="L5">Idling and minor stoppage time reduction</option>
+      <option value="L6" data-details="L6">Speed loss time reduction</option>
+      <option value="L7" data-details="L7">Defect and Rework time reduction</option>
+      <option value="L8" data-details="L8">MTTR time reduction</option>
+      <option value="L13" data-details="L13">Measurement and adjustment time reduction</option>
+      <option value="E&T" data-details="E&T">Enhace Employee Skill</option>
+      <option value="SHE" data-details="SHE">Elimination of Unsafe condition</option>
+      <option value="OTPM" data-details="OTPM">Office Area Time Saving</option>
+      <option value="DM1" data-details="DM1">Elimination Machine Problem in New Machines</option>
+
+      
+  </select>
+
+  <div style="position:absolute;font-size:30px;height:50px;top:700px;left:50px;" id="details-container"></div>
+
+  <script>
+    let myChart = null;
+
+    function showCarDetails() {
+      const carSelect = document.getElementById('car-select');
+      const selectedOption = carSelect.options[carSelect.selectedIndex];
+      const details = selectedOption.getAttribute('data-details') || 'Select a Kaizen Theme for more details.';
+      const detailsContainer = document.getElementById('details-container');
+      
+      detailsContainer.innerHTML = `<p>${details}</p>`;
+
+      if (details === "L1") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>`;
+      } else if (details === "SOC") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen No of SOC : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen No of SOC : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Air / Oil / Coolant Leakage details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Air / Oil / Coolant Leakage: <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Air / Oil / Coolant Leakage was corrected permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:40px;top:10px;font-size:30px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      }
+    }
+  </script>
+                <input style="position:absolute;font-size:30px;height:50px;top:1000px;left:50px;" type="submit" value="submit" />
+            </p>
+        </form>
+
+</div>
+
+<script>
+function encodeFile(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+      resolve(fileLoadedEvent.target.result);
+    };
+    fileReader.onerror = function(error) {
+      reject(error);
+    };
+    if(file) {
+      fileReader.readAsDataURL(file);
+    } else {
+      resolve('');
+    }
+  });
+}
+
+async function generateKaizen() {
+  try {
+    const beforePhotoInput = document.getElementById("beforephoto").files[0];
+    const afterPhotoInput = document.getElementById("afterphoto").files[0];
+    const empPhotoInput = document.getElementById("empphoto").files[0];
+    
+    const beforeSocElement = document.getElementById("beforesoc");
+    const afterSocElement = document.getElementById("aftersoc");
+    const beforeSoc = beforeSocElement ? parseFloat(beforeSocElement.value) : 0;
+    const afterSoc = afterSocElement ? parseFloat(afterSocElement.value) : 0;
+    
+    const leakageDetails = document.getElementById("leakage-details") ? document.getElementById("leakage-details").value : '';
+    const leakageReason = document.getElementById("leakage-reason") ? document.getElementById("leakage-reason").value : '';
+    const leakageCorrection = document.getElementById("leakage-correction") ? document.getElementById("leakage-correction").value : '';
+    const rootCause = document.getElementById('root-cause-select') ? document.getElementById('root-cause-select').value : '';
+
+
+    const [beforephoto, afterphoto, empphoto] = await Promise.all([
+      encodeFile(beforePhotoInput),
+      encodeFile(afterPhotoInput),
+      encodeFile(empPhotoInput)
+    ]);
+
+    const knoo = document.getElementById("knoi").value;
+    const startdate = document.getElementById("startdate").value;
+    const finishdate = document.getElementById("finishdate").value;
+    const members = document.getElementById("members").value;
+    const carSelect = document.getElementById('car-select');
+    const selectedTheme = carSelect.value;
+    
+    const machinename = document.getElementById("machinename") ? document.getElementById("machinename").value : '';
+    let hdMachines = document.getElementById('hd-machines') ? document.getElementById('hd-machines').value : '';
+
+    let kaizentheme = '';
+    if (selectedTheme === 'SOC') {
+        kaizentheme = 'To eliminate SOC';
+    } else if (selectedTheme === 'L1') {
+        kaizentheme = 'To eliminate Machine Breakdown Phenomenon';
+    } else if (selectedTheme === 'HTA') {
+        kaizentheme = 'To eliminate HTA';
+    } else if (selectedTheme === 'L2') {
+        kaizentheme = 'Job setting time reduction';
+    } else if (selectedTheme === 'L3') {
+        kaizentheme = 'Tool Change time reduction';
+    } else if (selectedTheme === 'L5') {
+        kaizentheme = 'Idling and minor stoppage time reduction';
+    } else if (selectedTheme === 'L6') {
+        kaizentheme = 'Speed loss time reduction';
+    } else if (selectedTheme === 'L7') {
+        kaizentheme = 'Defect and Rework time reduction';
+    } else if (selectedTheme === 'L8') {
+        kaizentheme = 'MTTR time reduction';
+    } else if (selectedTheme === 'L13') {
+        kaizentheme = 'Measurement and adjustment time reduction';
+    } else if (selectedTheme === 'E&T') {
+        kaizentheme = 'Enhace Employee Skill';
+    } else if (selectedTheme === 'SHE') {
+        kaizentheme = 'Elimination of Unsafe condition';
+    } else if (selectedTheme === 'OTPM') {
+        kaizentheme = 'Office Area Time Saving';
+    } else if (selectedTheme === 'DM1') {
+        kaizentheme = 'Elimination Machine Problem in New Machines';
+    }
+    
+    let jhcellstyle_bg = '';
+    let pmcellstyle_bg = '';
+    let kkcellstyle_bg = '';
+    let qmcellstyle_bg = '';
+    let etcellstyle_bg = '';
+    let shecellstyle_bg = '';
+    let otpmcellstyle_bg = '';
+    let dmcellstyle_bg = '';
+
+    if (selectedTheme === 'SOC' || selectedTheme === 'HTA') {
+      jhcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'L1' || selectedTheme === 'L8') {
+      pmcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'L2' || selectedTheme === 'L3' || selectedTheme === 'L5' || selectedTheme === 'L6') {
+      kkcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'L7' || selectedTheme === 'L13') {
+      qmcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'E&T') {
+      etcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'SHE') {
+      shecellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'OTPM') {
+      otpmcellstyle_bg = '#006400';
+    }
+    if (selectedTheme === 'DM1') {
+      dmcellstyle_bg = '#006400';
+    }
+    
+    let kaizenIdea = '';
+    if (selectedTheme === 'SOC') {
+      if (rootCause === 'Poor Basic Condition') {
+        kaizenIdea = `To improve basic condition for elimination of ${leakageDetails}`;
+      } else if (rootCause === 'Poor Operating Condition') {
+        kaizenIdea = `To improve operating condition to elimination of ${leakageDetails}`;
+      } else if (rootCause === 'Week Design') {
+        kaizenIdea = `To improve Design to elimination of ${leakageDetails}`;
+      } else if (rootCause === 'Deterioration') {
+        kaizenIdea = `To improve life cycle to elimination of ${leakageDetails}`;
+      } else if (rootCause === 'Poor Skill') {
+        kaizenIdea = `To improve Skill level to elimination of ${leakageDetails}`;
+      }
+    }
+
+    let benefitsText = "";
+    const pBg = document.getElementById('benefit-p') && document.getElementById('benefit-p').checked ? 'darkgreen' : '';
+    const qBg = document.getElementById('benefit-q') && document.getElementById('benefit-q').checked ? 'darkgreen' : '';
+    const cBg = document.getElementById('benefit-c') && document.getElementById('benefit-c').checked ? 'darkgreen' : '';
+    const dBg = document.getElementById('benefit-d') && document.getElementById('benefit-d').checked ? 'darkgreen' : '';
+    const sBg = document.getElementById('benefit-s') && document.getElementById('benefit-s').checked ? 'darkgreen' : '';
+    const mBg = document.getElementById('benefit-m') && document.getElementById('benefit-m').checked ? 'darkgreen' : '';
+
+    if (pBg) benefitsText += "P - Productivity Improved\n";
+    if (qBg) benefitsText += "Q - Quality Improved\n";
+    if (cBg) benefitsText += "C - Cost Reduced\n";
+    if (dBg) benefitsText += "D - Delivery Improved\n";
+    if (sBg) benefitsText += "S - Safety Improved\n";
+    if (mBg) benefitsText += "M - Morale Improved\n";
+    
+    let mainContainer = document.getElementById("mainContainer");
+    let forminputContainer = document.getElementById("forminputContainer");
+    
+    const containerContent = `<table style="width:100%">
+  <tr>
+    <th style="height:50px;font-size:x-large;" colspan="12"><img style="position:absolute; left:30px; height:30px; width:90px; z-index:1;" src="logo.png" />Kaizen Idea Sheet</th>
+    <td  style="width:9%" rowspan="7"><img style="height:180px;width:120px;" src="${empphoto}" /></td>
+  </tr>
+  <tr>
+    <td colspan="10"> </td>
+    <td  style="width:6%">Rev.No.</td>
+    <td  style="width:9%">01 / 18-01-2024</td>
+  </tr>
+  <tr>
+    <td  style="width:6%">Doc.No.:</td>
+    <td  style="width:6%">DT/FMT/KAIZEN/00</td>
+    <td colspan="8"> </td>
+    <td  style="width:6%">DCR No.:</td>
+    <td  style="width:9%">1348</td>
+  </tr>
+  <tr>
+    <td  style="width:6%">Doc.Name.:</td>
+    <td  style="width:14%">Kaizen Idea Sheet</td>
+    <td colspan="8"> </td>
+    <td  style="width:12%">ERP Kaizen No:</td>
+    <td  style="width:9%">${knoo}</td>
+  </tr>
+  <tr style="height:25px;">
+    <td colspan="12"> </td>
+  </tr>
+ 
+  <tr>
+    <td style="vertical-align:top;" colspan="2" rowspan="3" style="width:20%">Theme: ${kaizentheme} ${machinename ? 'for ' + machinename + ' machine' : ''}</td>
+    <td>PILLAR</td>
+    <td id="JHcellstyle" style="text-align:center; background-color: ${jhcellstyle_bg};">JH</td>
+    <td id="KKcellstyle" style="text-align:center; background-color: ${kkcellstyle_bg};">KK</td>
+    <td id="PMcellstyle" style="text-align:center; background-color: ${pmcellstyle_bg};">PM</td>
+    <td id="QMcellstyle" style="text-align:center; background-color: ${qmcellstyle_bg};">QM</td>
+    <td id="OTPMcellstyle" style="text-align:center; background-color: ${otpmcellstyle_bg};">OTPM</td>
+    <td id="SHEcellstyle" style="text-align:center; background-color: ${shecellstyle_bg};">SHE</td>
+    <td id="E&Tcellstyle" style="text-align:center; background-color: ${etcellstyle_bg};">E&T</td>
+    <td id="DMcellstyle" style="text-align:center; background-color: ${dmcellstyle_bg};">DM</td>
+    <td style="text-align:left;" rowspan="2">Plant : Dietech</td>
+  </tr>
+  <tr>
+    <td>Loss</td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+  </tr>
+  <tr>
+    <td>PQCDSM</td>
+    <td id="Pcellstyle" style="text-align:center; background-color: ${pBg};">P</td>
+    <td id="Qcellstyle" style="text-align:center; background-color: ${qBg};">Q</td>
+    <td id="Ccellstyle" style="text-align:center; background-color: ${cBg};">C</td>
+    <td id="Dcellstyle" style="text-align:center; background-color: ${dBg};">D</td>
+    <td id="Scellstyle" style="text-align:center; background-color: ${sBg};">S</td>
+    <td id="Mcellstyle" style="text-align:center; background-color: ${mBg};">M</td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:center;"> </td>
+    <td style="text-align:left;" colspan="2">Machine : ${machinename}</td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top;" colspan="2" rowspan="7" style="width:20%">Problem / Present Status: <br>${leakageDetails}</td>
+    <td style="vertical-align:top;" colspan="9" rowspan="5">Kaizen Idea: <br>${kaizenIdea}</td>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" rowspan="3" >Benchmark : ${beforeSoc} Nos</td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Target : ${afterSoc} Nos</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Start Date :${startdate}</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="9" rowspan="2" >Countermeasure : <br>${leakageCorrection}</td>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Finish Date :${finishdate}</td> 
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="9" >Members :${members}</td> 
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" >Analysis : <br>${leakageReason}</td> 
+    <td style="text-align:center;height:50px;vertical-align:top;" colspan="5" >Before<br><img style="height:180px;width:360px;" src="${beforephoto}" /></td>
+    <td style="text-align:center;height:50px;vertical-align:top;" colspan="4" >After<br><img style="height:180px;width:300px;" src="${afterphoto}" /></td>
+    <td style="text-align:left;height:200px;vertical-align:top;" colspan="4" >Benefits:<br>${benefitsText.replace(/\n/g, '<br>')}</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" >Root Cause : <br>${rootCause}</td> 
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="9" >Results:<br><canvas id="socChart" width="360" height="180" style="width:360px; height:180px;"></canvas></td>
+    <td style="text-align:left;height:100px;vertical-align:top;" colspan="4" >H/D Plan: ${hdMachines}</td>
+  </tr>
+</table>`;
+    
+    forminputContainer.innerHTML = "";
+    mainContainer.innerHTML = containerContent;
+
+    if (selectedTheme === 'SOC') {
+      setTimeout(() => {
+        const ctx = document.getElementById('socChart');
+
+        if (myChart) {
+          myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Before', 'After'],
+            datasets: [{
+              label: 'Nos',
+              data: [beforeSoc, afterSoc],
+              backgroundColor: [
+                'darkred',
+                'darkgreen'
+              ],
+              borderColor: [
+                'darkred',
+                'darkgreen'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'SOC Elimination'
+              },
+              datalabels: {
+                align: 'end',
+                anchor: 'end',
+                color: '#000',
+                font: {
+                  weight: 'bold'
+                },
+                formatter: function(value, context) {
+                  return value;
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Nos'
+                },
+                grid: {
+                  display: false
+                }
+              }
+            }
+          }
+        });
+      }, 0);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+</script>
+
+</body>
+
+</html>
