@@ -192,6 +192,282 @@ input[type=submit]:hover {
                                          <option value="Deterioration">Deterioration</option>
                                          <option value="Poor Skill">Poor Skill</option>
                                      </select></p>`;
+      } else if (details === "L1") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen No of Breakdown Occurance : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen No of Breakdown Occurance : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Enter Breakdown details with duration : <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Breakdown Occurance : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Breakdown was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L2") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Job setting time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Job setting time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Job setting time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Job setting time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Job setting time was reduced permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L3") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Tool Change Time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Tool Change Time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Tool Change time details : <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Tool Change time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Tool change time was reduced permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L5") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Idling & Minor stoppage time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Idling & Minor stoppage time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Idling & Minor stoppage time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Idling & Minor stoppage time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Idling & Minor stoppage time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L6") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen speed loss time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen speed loss time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Speed loss time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for speed loss time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How speed loss time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L7") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Defect / Rework time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Defect / Rework time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Defect / Rework time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Defect / Rework time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Defect / Rework time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L8") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen MTTR (Mean time to repair) time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen MTTR (Mean time to repair) time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>MTTR (Mean time to repair) time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for MTTR (Mean time to repair) time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How MTTR (Mean time to repair) time was reduced permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "L13") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Measurement and adjustment time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Measurement and adjustment time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Measurement and adjustment time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Measurement and adjustment time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Measurement and adjustment time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "E&T") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Employee Skill level : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Employee Skill level : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines / Department : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Employee skill level details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Employee skill level : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Employee skill level improved permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "SHE") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen Unsafe condition : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Unsafe condition : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Unsafe condition details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Unsafe condition : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Unsafe condition was eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "OTPM") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen time spent in Office area activity : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen time spent in Office area activity: <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Office area activity time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Office area activity time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Office area activity time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
+      } else if (details === "DM1") {
+         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
+                                     <p>Before Kaizen No of failure in old machine / product : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen No of failure in old machine / product : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Benefit Area: </p>
+                                     <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
+                                     <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
+                                     <p><input type="checkbox" id="benefit-c" name="benefit-c" value="C"> <label for="benefit-c">Cost</label></p>
+                                     <p><input type="checkbox" id="benefit-d" name="benefit-d" value="D"> <label for="benefit-d">Delivery</label></p>
+                                     <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
+                                     <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
+                                     <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
+                                     <p>Old machine / product failure details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Old machine / product failure : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Old machine / product failure was eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
+                                     <p>Root Cause: <select style="height:60px;top:3px;font-size:30px;width:600px;" id="root-cause-select" name="root-cause">
+                                         <option value="">--Select Root Cause--</option>
+                                         <option value="Poor Basic Condition">Poor Basic Condition</option>
+                                         <option value="Poor Operating Condition">Poor Operating Condition</option>
+                                         <option value="Week Design">Week Design</option>
+                                         <option value="Deterioration">Deterioration</option>
+                                         <option value="Poor Skill">Poor Skill</option>
+                                     </select></p>`;
       }
     }
   </script>
