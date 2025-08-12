@@ -11,7 +11,7 @@ table, th, td {
   box-sizing: border-box;
 }
 
-input[type=text], select, textarea {
+input[type=text], input[type=number], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -505,19 +505,64 @@ function encodeFile(file) {
 
 async function generateKaizen() {
   try {
-    const beforePhotoInput = document.getElementById("beforephoto").files[0];
-    const afterPhotoInput = document.getElementById("afterphoto").files[0];
-    const empPhotoInput = document.getElementById("empphoto").files[0];
-    
+    const knoo = document.getElementById("knoi").value;
+    const startdate = document.getElementById("startdate").value;
+    const finishdate = document.getElementById("finishdate").value;
+    const members = document.getElementById("members").value;
+    const carSelect = document.getElementById('car-select');
+    const selectedTheme = carSelect.value;
+    const machinename = document.getElementById("machinename") ? document.getElementById("machinename").value : '';
     const beforeSocElement = document.getElementById("beforesoc");
     const afterSocElement = document.getElementById("aftersoc");
     const beforeSoc = beforeSocElement ? parseFloat(beforeSocElement.value) : 0;
     const afterSoc = afterSocElement ? parseFloat(afterSocElement.value) : 0;
-    
     const leakageDetails = document.getElementById("leakage-details") ? document.getElementById("leakage-details").value : '';
     const leakageReason = document.getElementById("leakage-reason") ? document.getElementById("leakage-reason").value : '';
     const leakageCorrection = document.getElementById("leakage-correction") ? document.getElementById("leakage-correction").value : '';
     const rootCause = document.getElementById('root-cause-select') ? document.getElementById('root-cause-select').value : '';
+    const hdMachines = document.getElementById('hd-machines') ? document.getElementById('hd-machines').value : '';
+    const beforePhotoInput = document.getElementById("beforephoto").files[0];
+    const afterPhotoInput = document.getElementById("afterphoto").files[0];
+    const empPhotoInput = document.getElementById("empphoto").files[0];
+
+    const missingFields = [];
+    if (!knoo) missingFields.push("Kaizen No");
+    if (!startdate) missingFields.push("Start Date");
+    if (!finishdate) missingFields.push("Finish Date");
+    if (!members) missingFields.push("Members");
+    if (!selectedTheme) missingFields.push("Kaizen Theme");
+    if (selectedTheme) {
+        if (!machinename) missingFields.push("Machine Name");
+        if (isNaN(beforeSoc)) missingFields.push("Before Kaizen Value");
+        if (isNaN(afterSoc)) missingFields.push("After Kaizen Value");
+        if (!leakageDetails) missingFields.push("Details");
+        if (!leakageReason) missingFields.push("Reason");
+        if (!leakageCorrection) missingFields.push("Correction/Countermeasure");
+        // New validation check for Benefits
+        const benefitP = document.getElementById('benefit-p')?.checked;
+        const benefitQ = document.getElementById('benefit-q')?.checked;
+        const benefitC = document.getElementById('benefit-c')?.checked;
+        const benefitD = document.getElementById('benefit-d')?.checked;
+        const benefitS = document.getElementById('benefit-s')?.checked;
+        const benefitM = document.getElementById('benefit-m')?.checked;
+
+        if (!(benefitP || benefitQ || benefitC || benefitD || benefitS || benefitM)) {
+            missingFields.push("At least one Benefit check box");
+        }
+        // New validation check for Root Cause
+        if (document.getElementById('root-cause-select') && !rootCause) {
+            missingFields.push("Root Cause");
+        }
+    }
+    if (!beforePhotoInput) missingFields.push("Before Photo");
+    if (!afterPhotoInput) missingFields.push("After Photo");
+    if (!empPhotoInput) missingFields.push("Employee Photo");
+
+
+    if (missingFields.length > 0) {
+      alert("Please fill in the following fields:\n" + missingFields.join("\n"));
+      return;
+    }
 
 
     const [beforephoto, afterphoto, empphoto] = await Promise.all([
@@ -526,15 +571,6 @@ async function generateKaizen() {
       encodeFile(empPhotoInput)
     ]);
 
-    const knoo = document.getElementById("knoi").value;
-    const startdate = document.getElementById("startdate").value;
-    const finishdate = document.getElementById("finishdate").value;
-    const members = document.getElementById("members").value;
-    const carSelect = document.getElementById('car-select');
-    const selectedTheme = carSelect.value;
-    
-    const machinename = document.getElementById("machinename") ? document.getElementById("machinename").value : '';
-    let hdMachines = document.getElementById('hd-machines') ? document.getElementById('hd-machines').value : '';
 
     let uom = '';
     let kaizenTheme = '';
