@@ -144,6 +144,16 @@ input[type=submit]:hover {
       
       detailsContainer.innerHTML = `<p>${details}</p>`;
 
+      // Get UOM for the selected theme
+      let uom = '';
+      if (['SOC', 'HTA', 'L1', 'SHE', 'DM1'].includes(details)) {
+        uom = 'Nos';
+      } else if (details === 'E&T') {
+        uom = '%';
+      } else {
+        uom = 'mins';
+      }
+
       if (details === "SOC") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
                                      <p>Before Kaizen No of SOC : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
@@ -192,8 +202,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L1") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen No of Breakdown Occurance : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen No of Breakdown Occurance : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Breakdown Occurance (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Breakdown Occurance (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -215,8 +225,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L2") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Job setting time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Job setting time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Job setting time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Job setting time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -238,8 +248,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L3") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Tool Change Time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Tool Change Time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Tool Change Time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Tool Change Time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -261,8 +271,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L5") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Idling & Minor stoppage time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Idling & Minor stoppage time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Idling & Minor stoppage time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Idling & Minor stoppage time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -284,8 +294,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L6") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen speed loss time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen speed loss time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen speed loss time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen speed loss time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -307,8 +317,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L7") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Defect / Rework time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Defect / Rework time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Defect / Rework time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Defect / Rework time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -330,8 +340,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L8") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen MTTR (Mean time to repair) time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen MTTR (Mean time to repair) time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen MTTR (Mean time to repair) time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen MTTR (Mean time to repair) time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -353,8 +363,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "L13") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Measurement and adjustment time : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Measurement and adjustment time : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Measurement and adjustment time (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Measurement and adjustment time (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -376,8 +386,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "E&T") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Employee Skill level : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Employee Skill level : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Employee Skill level (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Employee Skill level (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -399,8 +409,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "SHE") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen Unsafe condition : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen Unsafe condition : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen Unsafe condition (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen Unsafe condition (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -422,8 +432,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "OTPM") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen time spent in Office area activity : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen time spent in Office area activity: <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen time spent in Office area activity (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen time spent in Office area activity (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -445,8 +455,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "DM1") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen No of failure in old machine / product : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
-                                     <p>After Kaizen No of failure in old machine / product : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
+                                     <p>Before Kaizen No of failure in old machine / product (${uom}) : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen No of failure in old machine / product (${uom}) : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -526,37 +536,88 @@ async function generateKaizen() {
     const machinename = document.getElementById("machinename") ? document.getElementById("machinename").value : '';
     let hdMachines = document.getElementById('hd-machines') ? document.getElementById('hd-machines').value : '';
 
-    let kaizentheme = '';
-    if (selectedTheme === 'SOC') {
-        kaizentheme = 'To eliminate SOC';
-    } else if (selectedTheme === 'L1') {
-        kaizentheme = 'To eliminate Machine Breakdown Phenomenon';
-    } else if (selectedTheme === 'HTA') {
-        kaizentheme = 'To eliminate HTA';
-    } else if (selectedTheme === 'L2') {
-        kaizentheme = 'Job setting time reduction';
-    } else if (selectedTheme === 'L3') {
-        kaizentheme = 'Tool Change time reduction';
-    } else if (selectedTheme === 'L5') {
-        kaizentheme = 'Idling and minor stoppage time reduction';
-    } else if (selectedTheme === 'L6') {
-        kaizentheme = 'Speed loss time reduction';
-    } else if (selectedTheme === 'L7') {
-        kaizentheme = 'Defect and Rework time reduction';
-    } else if (selectedTheme === 'L8') {
-        kaizentheme = 'MTTR time reduction';
-    } else if (selectedTheme === 'L13') {
-        kaizentheme = 'Measurement and adjustment time reduction';
-    } else if (selectedTheme === 'E&T') {
-        kaizentheme = 'Enhace Employee Skill';
-    } else if (selectedTheme === 'SHE') {
-        kaizentheme = 'Elimination of Unsafe condition';
-    } else if (selectedTheme === 'OTPM') {
-        kaizentheme = 'Office Area Time Saving';
-    } else if (selectedTheme === 'DM1') {
-        kaizentheme = 'Elimination Machine Problem in New Machines';
+    let uom = '';
+    let kaizenTheme = '';
+    let kaizenThemeTitle = '';
+
+    switch (selectedTheme) {
+      case 'SOC':
+        kaizenTheme = 'To eliminate SOC';
+        kaizenThemeTitle = 'SOC Elimination';
+        uom = 'Nos';
+        break;
+      case 'HTA':
+        kaizenTheme = 'To eliminate HTA';
+        kaizenThemeTitle = 'HTA Elimination';
+        uom = 'Nos';
+        break;
+      case 'L1':
+        kaizenTheme = 'To eliminate Machine Breakdown Phenomenon';
+        kaizenThemeTitle = 'Machine Breakdown Phenomenon Elimination';
+        uom = 'Nos';
+        break;
+      case 'L2':
+        kaizenTheme = 'Job setting time reduction';
+        kaizenThemeTitle = 'Job setting time reduction';
+        uom = 'mins';
+        break;
+      case 'L3':
+        kaizenTheme = 'Tool Change time reduction';
+        kaizenThemeTitle = 'Tool Change time reduction';
+        uom = 'mins';
+        break;
+      case 'L5':
+        kaizenTheme = 'Idling and minor stoppage time reduction';
+        kaizenThemeTitle = 'Idling and minor stoppage time reduction';
+        uom = 'mins';
+        break;
+      case 'L6':
+        kaizenTheme = 'Speed loss time reduction';
+        kaizenThemeTitle = 'Speed loss time reduction';
+        uom = 'mins';
+        break;
+      case 'L7':
+        kaizenTheme = 'Defect and Rework time reduction';
+        kaizenThemeTitle = 'Defect and Rework time reduction';
+        uom = 'mins';
+        break;
+      case 'L8':
+        kaizenTheme = 'MTTR time reduction';
+        kaizenThemeTitle = 'MTTR time reduction';
+        uom = 'mins';
+        break;
+      case 'L13':
+        kaizenTheme = 'Measurement and adjustment time reduction';
+        kaizenThemeTitle = 'Measurement and adjustment time reduction';
+        uom = 'mins';
+        break;
+      case 'E&T':
+        kaizenTheme = 'Enhace Employee Skill';
+        kaizenThemeTitle = 'Enhace Employee Skill';
+        uom = '%';
+        break;
+      case 'SHE':
+        kaizenTheme = 'Elimination of Unsafe condition';
+        kaizenThemeTitle = 'Elimination of Unsafe condition';
+        uom = 'Nos';
+        break;
+      case 'OTPM':
+        kaizenTheme = 'Office Area Time Saving';
+        kaizenThemeTitle = 'Office Area Time Saving';
+        uom = 'mins';
+        break;
+      case 'DM1':
+        kaizenTheme = 'Elimination Machine Problem in New Machines';
+        kaizenThemeTitle = 'Elimination Machine Problem in New Machines';
+        uom = 'Nos';
+        break;
+      default:
+        kaizenTheme = '';
+        kaizenThemeTitle = 'Kaizen Results';
+        uom = '';
+        break;
     }
-    
+
     let jhcellstyle_bg = '';
     let pmcellstyle_bg = '';
     let kkcellstyle_bg = '';
@@ -617,6 +678,9 @@ async function generateKaizen() {
         kaizenIdea = `To improve Skill level to elimination of HTA`;
       }
     }
+    else {
+    kaizenIdea = leakageCorrection;
+    }
 
     let benefitsText = "";
     const pBg = document.getElementById('benefit-p') && document.getElementById('benefit-p').checked ? 'darkgreen' : '';
@@ -665,7 +729,7 @@ async function generateKaizen() {
   </tr>
  
   <tr>
-    <td style="vertical-align:top;" colspan="2" rowspan="3" style="width:20%">Theme: ${kaizentheme} ${machinename ? 'for ' + machinename + ' machine' : ''}</td>
+    <td style="vertical-align:top;" colspan="2" rowspan="3" style="width:20%">Theme: ${kaizenTheme} ${machinename ? 'for ' + machinename + ' machine' : ''}</td>
     <td>PILLAR</td>
     <td id="JHcellstyle" style="text-align:center; background-color: ${jhcellstyle_bg};">JH</td>
     <td id="KKcellstyle" style="text-align:center; background-color: ${kkcellstyle_bg};">KK</td>
@@ -703,12 +767,12 @@ async function generateKaizen() {
   <tr>
     <td style="vertical-align:top;" colspan="2" rowspan="7" style="width:20%">Problem / Present Status: <br>${leakageDetails}</td>
     <td style="vertical-align:top;" colspan="9" rowspan="5">Kaizen Idea: <br>${kaizenIdea}</td>
-    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" rowspan="3" >Benchmark : ${beforeSoc} Nos</td>
+    <td style="text-align:left;height:50px;vertical-align:top;" colspan="2" rowspan="3" >Benchmark : ${beforeSoc} ${uom}</td>
   </tr>
   <tr></tr>
   <tr></tr>
   <tr>
-    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Target : ${afterSoc} Nos</td>
+    <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Target : ${afterSoc} ${uom}</td>
   </tr>
   <tr>
     <td style="text-align:left;height:25px;vertical-align:top;" colspan="11" >Start Date :${startdate}</td>
@@ -736,22 +800,20 @@ async function generateKaizen() {
     forminputContainer.innerHTML = "";
     mainContainer.innerHTML = containerContent;
 
-    if (selectedTheme === 'SOC' || selectedTheme === 'HTA') {
+    if (selectedTheme === 'SOC' || selectedTheme === 'HTA' || selectedTheme === 'L1' || selectedTheme === 'L2' || selectedTheme === 'L3' || selectedTheme === 'L5' || selectedTheme === 'L6' || selectedTheme === 'L7' || selectedTheme === 'L8' || selectedTheme === 'L13' || selectedTheme === 'E&T' || selectedTheme === 'SHE' || selectedTheme === 'OTPM' || selectedTheme === 'DM1') {
       setTimeout(() => {
         const ctx = document.getElementById('socChart');
 
         if (myChart) {
           myChart.destroy();
         }
-
-        const chartTitle = selectedTheme === 'SOC' ? 'SOC Elimination' : 'HTA Elimination';
-
+        
         myChart = new Chart(ctx, {
           type: 'bar',
           data: {
             labels: ['Before', 'After'],
             datasets: [{
-              label: 'Nos',
+              label: uom,
               data: [beforeSoc, afterSoc],
               backgroundColor: [
                 'darkred',
@@ -773,7 +835,7 @@ async function generateKaizen() {
               },
               title: {
                 display: true,
-                text: chartTitle
+                text: kaizenThemeTitle
               },
               datalabels: {
                 align: 'end',
@@ -783,7 +845,7 @@ async function generateKaizen() {
                   weight: 'bold'
                 },
                 formatter: function(value, context) {
-                  return value;
+                  return `${value} ${uom}`;
                 }
               }
             },
@@ -792,7 +854,7 @@ async function generateKaizen() {
                 beginAtZero: true,
                 title: {
                   display: true,
-                  text: 'Nos'
+                  text: uom
                 },
                 grid: {
                   display: false
