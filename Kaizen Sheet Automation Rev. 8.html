@@ -171,8 +171,8 @@ input[type=submit]:hover {
                                      </select></p>`;
       } else if (details === "HTA") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
-                                     <p>Before Kaizen No of HTA : <input id="beforehta" style="height:40px;top:10px;font-size:30px;" type="number" name="beforehta" /></p>
-                                     <p>After Kaizen No of HTA : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="afterhta" /></p>
+                                     <p>Before Kaizen No of HTA : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
+                                     <p>After Kaizen No of HTA : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
                                      <p>Benefit Area: </p>
                                      <p><input type="checkbox" id="benefit-p" name="benefit-p" value="P"> <label for="benefit-p">Productivity</label></p>
                                      <p><input type="checkbox" id="benefit-q" name="benefit-q" value="Q"> <label for="benefit-q">Quality</label></p>
@@ -181,9 +181,9 @@ input[type=submit]:hover {
                                      <p><input type="checkbox" id="benefit-s" name="benefit-s" value="S"> <label for="benefit-s">Safety</label></p>
                                      <p><input type="checkbox" id="benefit-m" name="benefit-m" value="M"> <label for="benefit-m">Morale</label></p>
                                      <p>Horizontal Deployment Machines : <input id="hd-machines" style="height:40px;top:10px;font-size:30px;" type="text" name="hd-machines" /></p>
-                                     <p>Cleaning / Inspection / Lubrication / Tightening (adjustment) time details: <input id="clit-details" style="height:40px;top:10px;font-size:30px;" type="text" name="clit-details" /></p>
-                                     <p>Reason for Cleaning / Inspection / Lubrication / Tightening (adjustment) time: <input id="clit-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="clit-reason" /></p>
-                                     <p>How Cleaning / Inspection / Lubrication / Tightening (adjustment) time was reduced: <input id="clit-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="clit-correction" /></p>
+                                     <p>Cleaning / Inspection / Lubrication / Tightening (Adjustment) time details: <input id="leakage-details" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-details" /></p>
+                                     <p>Reason for Cleaning / Inspection / Lubrication / Tightening (Adjustment) time : <input id="leakage-reason" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-reason" /></p>
+                                     <p>How Cleaning / Inspection / Lubrication / Tightening (Adjustment) time was reduced / eliminated permanently: <input id="leakage-correction" style="height:40px;top:10px;font-size:30px;" type="text" name="leakage-correction" /></p>
                                      <p>Root Cause: <select style="height:40px;top:10px;font-size:30px;" id="root-cause-select" name="root-cause">
                                          <option value="">--Select Root Cause--</option>
                                          <option value="Poor Basic Condition">Poor Basic Condition</option>
@@ -195,7 +195,7 @@ input[type=submit]:hover {
       }
     }
   </script>
-                <input style="position:absolute;font-size:30px;height:50px;top:1000px;left:50px;" type="submit" value="submit" />
+                <input style="position:absolute;font-size:30px;height:50px;top:1300px;left:50px;" type="submit" value="submit" />
             </p>
         </form>
 
