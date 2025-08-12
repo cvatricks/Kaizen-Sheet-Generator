@@ -144,9 +144,7 @@ input[type=submit]:hover {
       
       detailsContainer.innerHTML = `<p>${details}</p>`;
 
-      if (details === "L1") {
-         detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>`;
-      } else if (details === "SOC") {
+      if (details === "SOC") {
          detailsContainer.innerHTML = `<p>Machine Name : <input id="machinename" style="height:40px;top:10px;font-size:30px;" type="text" name="machinename" /></p>
                                      <p>Before Kaizen No of SOC : <input id="beforesoc" style="height:40px;top:10px;font-size:30px;" type="number" name="beforesoc" /></p>
                                      <p>After Kaizen No of SOC : <input id="aftersoc" style="height:40px;top:10px;font-size:30px;" type="number" name="aftersoc" /></p>
